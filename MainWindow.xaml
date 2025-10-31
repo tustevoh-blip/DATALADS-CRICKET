@@ -1,0 +1,116 @@
+﻿<Window x:Class="DATALADS_CRICKET.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DATALADS Cricket Scorer" Height="720" Width="1280"
+        Background="Black">
+
+    <!-- ✅ Global Style: Makes all TextBlocks white -->
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="6,4"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="10">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ✅ LEFT SIDE (Video + HUD + Controls) -->
+        <StackPanel Grid.Column="0" Margin="5" >
+
+            <TextBlock Text="Video Source" FontWeight="Bold" Margin="0,0,0,5"/>
+
+            <ComboBox x:Name="CmbVideoSource" Width="250" Margin="0,0,0,10"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Button Content="▶ Start Preview" Width="120" Margin="0,0,5,0"
+                        Click="BtnStartPreview_Click"/>
+                <Button Content="⏹ Stop Preview" Width="120"
+                        Click="BtnStopPreview_Click"/>
+            </StackPanel>
+
+            <!-- Video Preview -->
+            <Border BorderBrush="Gray" BorderThickness="1">
+                <Grid>
+                    <Image x:Name="ImgPreview" Stretch="Uniform"/>
+                    <TextBlock x:Name="TxtNoSignal"
+                               Text="No Signal"
+                               Foreground="Red"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Visibility="Collapsed"/>
+                    <!-- HUD Overlay -->
+                    <TextBlock x:Name="TxtHud"
+                               Margin="10"
+                               VerticalAlignment="Bottom"
+                               HorizontalAlignment="Left"
+                               Foreground="Lime"
+                               FontSize="14"
+                               Text="HUD"
+                               Visibility="Collapsed"/>
+                </Grid>
+            </Border>
+
+        </StackPanel>
+
+        <!-- ✅ RIGHT SIDE (Match Summary + Scoring) -->
+        <StackPanel Grid.Column="1" Margin="10" >
+
+            <TextBlock Text="Match Summary" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock x:Name="LblScore" Text="Total: 0/0 (0.0 ov)"/>
+                <TextBlock x:Name="LblCRR" Text="CRR: 0.00"/>
+            </StackPanel>
+
+            <TextBlock Text="Batsmen" FontWeight="Bold"/>
+            <TextBlock x:Name="LblStriker" Text="Striker: -"/>
+            <TextBlock x:Name="LblNonStriker" Text="Non-Striker: -"/>
+
+            <TextBlock Text="Bowler" FontWeight="Bold" Margin="0,10,0,0"/>
+            <TextBlock x:Name="LblBowler" Text="Bowler: -"/>
+
+            <!-- Scoring Buttons -->
+            <TextBlock Text="Scoring Buttons" FontWeight="Bold" Margin="0,10,0,5"/>
+
+            <UniformGrid Columns="4" Rows="3" Margin="0,0,0,10">
+                <Button Content="0" Tag="0" Click="RunButton_Click"/>
+                <Button Content="1" Tag="1" Click="RunButton_Click"/>
+                <Button Content="2" Tag="2" Click="RunButton_Click"/>
+                <Button Content="3" Tag="3" Click="RunButton_Click"/>
+
+                <Button Content="4" Tag="4" Click="RunButton_Click"/>
+                <Button Content="6" Tag="6" Click="RunButton_Click"/>
+                <Button Content="W" Click="WicketButton_Click"/>
+                <Button Content="WD" Tag="WD" Click="ExtraButton_Click"/>
+
+                <Button Content="NB" Tag="NB" Click="ExtraButton_Click"/>
+                <Button Content="B" Tag="B" Click="ExtraButton_Click"/>
+                <Button Content="LB" Tag="LB" Click="ExtraButton_Click"/>
+                <Button Content="UNDO" Click="UndoButton_Click"/>
+            </UniformGrid>
+
+            <!-- This button is no longer used for save -->
+            <TextBlock Text="Clips are auto-saved when scoring." Foreground="Gray"/>
+
+            <TextBlock Text="Recorded Clips: C:\DATALADS APP CLIPS"
+                       FontSize="12"
+                       Foreground="Gray"
+                       Margin="0,15,0,0"/>
+
+        </StackPanel>
+
+    </Grid>
+</Window>
+
+
